@@ -1,28 +1,42 @@
-PCA-Simple-warp-divergence---Implement-Sum-Reduction.
+# PCA-Simple-warp-divergence---Implement-Sum-Reduction.
 Refer to the kernel reduceUnrolling8 and implement the kernel reduceUnrolling16, in which each thread handles 16 data blocks. Compare kernel performance with reduceUnrolling8 and use the proper metrics and events with nvprof to explain any difference in performance.
 
-Aim:
+## Aim:
+
 To implement the kernel reduceUnrolling16 and comapare the performance of kernal reduceUnrolling16 with kernal reduceUnrolling8 using proper metrics and events with nvprof.
 
-Procedure:
-Step 1 : Include the required files and library.
+## Procedure:
 
-Step 2 : Introduce a function named 'recursiveReduce' to implement Interleaved Pair Approach and function 'reduceInterleaved' to implement Interleaved Pair with less divergence.
+Step 1 :
+Include the required files and library.
 
-Step 3 : Introduce a function named 'reduceNeighbored' to implement Neighbored Pair with divergence and function 'reduceNeighboredLess' to implement Neighbored Pair with less divergence.
+Step 2 :
+Introduce a function named 'recursiveReduce' to implement Interleaved Pair Approach and function 'reduceInterleaved' to implement Interleaved Pair with less divergence.
 
-Step 4 : Introduce optimizations such as unrolling to reduce divergence.
+Step 3 :
+Introduce a function named 'reduceNeighbored' to implement Neighbored Pair with divergence and function 'reduceNeighboredLess' to implement Neighbored Pair with less divergence.
 
-Step 5 : Declare three global function named 'reduceUnrolling2' , 'reduceUnrolling4' , 'reduceUnrolling8' , 'reduceUnrolling16' and then set the thread ID , convert global data pointer to the local pointer of the block , perform in-place reduction in global memory ,finally write the result of the block to global memory in all the three function respectively.
+Step 4 :
+Introduce optimizations such as unrolling to reduce divergence.
 
-Step 6 : Declare functions to unroll the warp. Declare a global function named 'reduceUnrollWarps8' and then set the thread ID , convert global data pointer to the local pointer of the block , perform in-place reduction in global memory , unroll the warp ,finally write the result of the block to global memory infunction .
+Step 5 :
+Declare three global function named 'reduceUnrolling2' , 'reduceUnrolling4' , 'reduceUnrolling8' , 'reduceUnrolling16' and then set the thread ID , convert global data pointer to the local pointer of the block , perform in-place reduction in global memory ,finally write the result of the block to global memory in all the three function respectively.
 
-Step 7 : Declare Main method/function . In the Main method , set up the device and initialise the size and block size. Allocate the host memory and device memory and then call the kernals decalred in the function.
+Step 6 :
+Declare functions to unroll the warp. Declare a global function named 'reduceUnrollWarps8' and then set the thread ID , convert global data pointer to the local pointer of the block , perform in-place reduction in global memory , unroll the warp ,finally write the result of the block to global memory infunction .
 
-Step 8 : Atlast , free the host and device memory then reset the device and check for results.
+Step 7 :
+Declare Main method/function . In the Main method , set up the device and initialise the size and block size. Allocate the host memory and device memory and then call the kernals decalred in the function.
 
-Program:
-kernel reduceUnrolling8
+Step 8 :
+Atlast , free the host and device memory then reset the device and check for results.
+
+
+## Program:
+
+### kernel reduceUnrolling8
+
+```
 Name : PRIYADARSHINI
 Reg No : 212220230038
 
@@ -719,7 +733,11 @@ int main(int argc, char **argv)
     return EXIT_SUCCESS;
 }
 
-kernel reduceUnrolling16
+```
+
+
+### kernel reduceUnrolling16
+```
 Name : PRASHETHAA R
 Reg No : 212220230036
 
@@ -1492,8 +1510,13 @@ int main(int argc, char **argv)
 
     return EXIT_SUCCESS;
 }
-Output:
-kernel reduceUnrolling8
+```
+
+## Output:
+
+### kernel reduceUnrolling8
+
+```
 root@MidPC:/home/student/Desktop# nvcc --version
 nvcc: NVIDIA (R) Cuda compiler driver
 Copyright (c) 2005-2019 NVIDIA Corporation
@@ -1557,7 +1580,11 @@ gpu Cmptnroll   elapsed 0.000387 sec gpu_sum: 2139353471 <<<grid 4096 block 512>
                     0.00%     900ns         2     450ns     280ns     620ns  cuDeviceGet
                     0.00%     370ns         1     370ns     370ns     370ns  cuDeviceGetUuid
 root@MidPC:/home/student/Desktop#
-kernel reduceUnrolling16
+```
+
+### kernel reduceUnrolling16
+
+```
 Password: 
 root@MidPC:/home/student# cd Desktop
 root@MidPC:/home/student/Desktop# nvcc --version
@@ -1626,7 +1653,12 @@ gpu Cmptnroll   elapsed 0.000305 sec gpu_sum: 2139353471 <<<grid 4096 block 512>
                     0.00%  2.6700us         3     890ns     240ns  2.0700us  cuDeviceGetCount
                     0.00%     300ns         1     300ns     300ns     300ns  cuDeviceGetUuid
 root@MidPC:/home/student/Desktop#
-The time taken by the kernel reduceUnrolling16 is comparatively less to the kernal reduceUnrolling8 as each thread in the kernel reduceUnrolling16 handles 16 data blocks.
-Result:
-Implementation of the kernel reduceUnrolling16 is done and the performance of kernal reduceUnrolling16 is comapared with kernal reduceUnrolling8 using proper metrics and events with nvprof.
+```
 
+```
+The time taken by the kernel reduceUnrolling16 is comparatively less to the kernal reduceUnrolling8 as each thread in the kernel reduceUnrolling16 handles 16 data blocks.
+```
+
+## Result:
+
+Implementation of the kernel reduceUnrolling16 is done and the performance of kernal reduceUnrolling16 is comapared with kernal reduceUnrolling8 using proper metrics and events with nvprof.
